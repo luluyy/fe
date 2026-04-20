@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite vs Webpack 可视化对比</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans+SC:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0f0d14;
+        --panel: #171321;
+        --ink: #f8f3e7;
+        --muted: #b9b2a4;
+        --vite: #6ae3ff;
+        --webpack: #ff8f52;
+        --line: #2c2640;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Noto Sans SC", sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(1200px 400px at 10% -10%, #26203a 0, transparent 70%),
+          radial-gradient(900px 500px at 100% 0, #2a1b1a 0, transparent 70%),
+          var(--bg);
+      }
+      .wrap { max-width: 1100px; margin: 24px auto 56px; padding: 0 16px; }
+      h1 {
+        font-family: "Bebas Neue", sans-serif;
+        letter-spacing: 1.2px;
+        font-size: clamp(44px, 9vw, 92px);
+        margin: 0;
+        line-height: 0.9;
+      }
+      .sub { color: var(--muted); margin-top: 8px; }
+      .grid { display: grid; gap: 14px; margin-top: 16px; }
+      .two { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+      .card {
+        background: linear-gradient(180deg, #1a1627, #151220);
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+        box-shadow: 0 20px 40px rgba(0,0,0,.3);
+      }
+      .title { font-size: 18px; margin: 0 0 10px; }
+      .chip { display: inline-block; padding: 4px 8px; border-radius: 999px; font-size: 12px; }
+      .vite { color: #0b1f2b; background: var(--vite); }
+      .webpack { color: #2b1407; background: var(--webpack); }
+      .flow { font-size: 13px; line-height: 1.6; color: #d9d3c7; }
+      .flow b { color: #fff; }
+      .bars { display: grid; gap: 10px; }
+      .bar { display: grid; grid-template-columns: 110px 1fr 34px; gap: 8px; align-items: center; font-size: 12px; }
+      .track { height: 10px; background: #2b2740; border-radius: 999px; overflow: hidden; }
+      .fill { height: 100%; border-radius: 999px; }
+      .legend { color: var(--muted); font-size: 12px; margin-top: 8px; }
+      .decision { display: grid; gap: 10px; }
+      .node { border: 1px dashed #3a3356; border-radius: 10px; padding: 10px; }
+      .node strong { display: block; margin-bottom: 4px; }
+      .ok { color: #bafccb; }
+      .warn { color: #ffd3b7; }
+      .kbd { border: 1px solid #3d3659; border-bottom-width: 3px; border-radius: 8px; padding: 1px 6px; font-size: 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Vite vs Webpack</h1>
+      <div class="sub">一屏看懂：启动、HMR、生态、定制、迁移成本（用于面试速记）</div>
+
+      <div class="grid two">
+        <section class="card">
+          <p class="title">开发时流程图</p>
+          <p class="flow"><span class="chip vite">Vite</span> <b>浏览器请求模块</b> -> Dev Server 按需转换 -> 返回 ESM -> 页面更新</p>
+          <p class="flow"><span class="chip webpack">Webpack</span> Entry 出发 -> 构建依赖图 -> 内存打包 -> 返回 bundle -> 页面更新</p>
+          <p class="legend">关键词：Vite = bundleless dev；Webpack = bundled dev</p>
+        </section>
+
+        <section class="card">
+          <p class="title">能力雷达（简化版）</p>
+          <div class="bars">
+            <div class="bar"><span>冷启动</span><div class="track"><div class="fill" style="width:92%;background:var(--vite)"></div></div><span>9.2</span></div>
+            <div class="bar"><span>HMR 反馈</span><div class="track"><div class="fill" style="width:90%;background:var(--vite)"></div></div><span>9.0</span></div>
+            <div class="bar"><span>复杂定制</span><div class="track"><div class="fill" style="width:88%;background:var(--webpack)"></div></div><span>8.8</span></div>
+            <div class="bar"><span>历史生态</span><div class="track"><div class="fill" style="width:91%;background:var(--webpack)"></div></div><span>9.1</span></div>
+            <div class="bar"><span>迁移难度低</span><div class="track"><div class="fill" style="width:84%;background:var(--vite)"></div></div><span>8.4</span></div>
+          </div>
+          <p class="legend">说明：示意分，仅用于认知，不是绝对 benchmark</p>
+        </section>
+      </div>
+
+      <div class="grid two">
+        <section class="card">
+          <p class="title">面试口述模板（40 秒）</p>
+          <p class="flow">
+            Vite 在开发阶段更快，本质是原生 ESM + 按需转换，避免先全量打包；
+            Webpack 的优势在复杂企业场景的生态与可定制能力。我的选型标准是：
+            <b>新项目优先 Vite，历史包袱重且强依赖插件链时优先 Webpack</b>，
+            最后用启动时间、热更新时间、构建时长和线上回归数据做量化决策。
+          </p>
+          <p class="legend">现场可加：<span class="kbd">bundleless != 不打包生产</span></p>
+        </section>
+
+        <section class="card">
+          <p class="title">选择决策图</p>
+          <div class="decision">
+            <div class="node">
+              <strong>Q1: 新项目吗？</strong>
+              <span class="ok">是 -> Vite 倾向更高</span>
+            </div>
+            <div class="node">
+              <strong>Q2: 强依赖 Webpack 插件链 / 模块联邦？</strong>
+              <span class="warn">是 -> Webpack 稳妥；否 -> 继续看 Vite</span>
+            </div>
+            <div class="node">
+              <strong>Q3: 目标是提升本地开发体验？</strong>
+              <span class="ok">是 -> 优先 Vite</span>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </body>
+  </html>

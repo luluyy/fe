@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blog Style Labs</title>
+    <style>
+      body { font-family: ui-sans-serif, system-ui; margin: 0; background: #0b0f19; color: #e5e7eb; }
+      .wrap { max-width: 900px; margin: 48px auto; padding: 0 16px; }
+      h1 { margin: 0 0 8px; font-size: 36px; }
+      .sub { color: #9ca3af; margin-bottom: 20px; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+      a.card { display:block; padding:16px; border-radius:12px; text-decoration:none; color:#e5e7eb; border:1px solid #263148; background:#121a2a; }
+      a.card:hover { transform: translateY(-2px); border-color:#4f83ff; }
+      .tag { font-size: 12px; color: #93c5fd; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>技术博客风格实验室</h1>
+      <p class="sub">3 种可直接套用的博客视觉样板</p>
+      <div class="grid">
+        <a class="card" href="./scrolly/">
+          <div class="tag">Scroll Storytelling</div>
+          <h3>滚动叙事风</h3>
+          <p>滚动驱动章节切换 + 粘性流程图内容区</p>
+        </a>
+        <a class="card" href="./terminal/">
+          <div class="tag">Terminal Hacker</div>
+          <h3>终端黑客风</h3>
+          <p>终端窗口、命令输入、打字机效果与扫描线</p>
+        </a>
+        <a class="card" href="./tech3d/">
+          <div class="tag">3D / Canvas Tech</div>
+          <h3>3D 科技风</h3>
+          <p>Canvas 粒子星场 + 透视卡片 + 霓虹光效</p>
+        </a>
+      </div>
+    </div>
+  </body>
+  </html>
