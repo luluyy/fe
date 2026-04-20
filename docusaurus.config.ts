@@ -13,16 +13,16 @@ const config: Config = {
   future: {
     v4: true, // Improve compatibility with the upcoming Docusaurus v4
   },
-
+//https://github.com/luluyy?tab=repositories
   // 上线后改成你的 GitHub Pages 地址；
   // 例如：个人/组织页：https://<username>.github.io  => baseUrl: '/'
   // 仓库页：https://<username>.github.io/<repo>/  => baseUrl: '/<repo>/'
-  url: 'https://<username>.github.io',
-  baseUrl: '/<repo>/',
+  url: 'https://luluyy.github.io',
+  baseUrl: '/fe/',
 
   // GitHub Pages：改成你的 GitHub 用户名和仓库名
-  organizationName: '<username>',
-  projectName: '<repo>',
+  organizationName: 'luluyy',
+  projectName: 'fe',
 
   onBrokenLinks: 'throw',
 
@@ -102,7 +102,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/your-username/your-repo',
+          href: 'https://github.com/luluyy/fe',
           label: 'GitHub',
           position: 'right',
         },
