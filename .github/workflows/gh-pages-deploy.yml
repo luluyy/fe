@@ -33,8 +33,13 @@ jobs:
           node-version: '20'
           cache: 'npm'
 
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
+        with:
+          bun-version: latest
+bun
       - name: Install dependencies
-        run: npm ci
+        run: bun install
 
       - name: Build Docusaurus site
         run: npm run build
