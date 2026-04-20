@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>滚动叙事风</title>
+    <style>
+      body { margin: 0; font-family: "Segoe UI", sans-serif; background: #090b12; color: #e5e7eb; }
+      .layout { display: grid; grid-template-columns: 1.1fr 0.9fr; min-height: 100vh; }
+      .left { padding: 48px 28px; }
+      .step { min-height: 80vh; display: flex; align-items: center; opacity: .4; transition: .25s; }
+      .step.active { opacity: 1; }
+      .step h2 { margin: 0 0 10px; }
+      .right { position: sticky; top: 0; height: 100vh; display: grid; place-items: center; border-left: 1px solid #1f2937; }
+      .panel { width: min(500px, 88%); background: #111827; border: 1px solid #334155; border-radius: 14px; padding: 18px; }
+      .line { height: 8px; border-radius: 999px; margin: 10px 0; background: #1f2937; overflow: hidden; }
+      .fill { height: 100%; width: 0; background: linear-gradient(90deg,#22d3ee,#60a5fa); transition: .4s; }
+      a { color: #93c5fd; text-decoration: none; }
+    </style>
+  </head>
+  <body>
+    <div class="layout">
+      <section class="left">
+        <div class="step active" data-progress="20"><div><h2>1. 问题背景</h2><p>线上首屏慢，LCP 高于 4s，用户跳出率偏高。</p></div></div>
+        <div class="step" data-progress="45"><div><h2>2. 诊断瓶颈</h2><p>发现首屏 JS 过大、接口串行、图片无尺寸占位。</p></div></div>
+        <div class="step" data-progress="70"><div><h2>3. 优化策略</h2><p>静态化可静态页面、动态拆包、并发取数、next/image 优化。</p></div></div>
+        <div class="step" data-progress="100"><div><h2>4. 结果复盘</h2><p>LCP 从 4.2s 降至 2.1s。<br/> <a href="../">返回风格入口</a></p></div></div>
+      </section>
+      <aside class="right">
+        <div class="panel">
+          <h3 id="title">问题背景</h3>
+          <p id="desc">滚动左侧内容，右侧会同步展示当前章节状态。</p>
+          <div class="line"><div class="fill" id="fill"></div></div>
+          <small id="progress">20%</small>
+        </div>
+      </aside>
+    </div>
+    <script>
+      const steps = [...document.querySelectorAll(".step")];
+      const title = document.getElementById("title");
+      const desc = document.getElementById("desc");
+      const fill = document.getElementById("fill");
+      const progress = document.getElementById("progress");
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          steps.forEach((s) => s.classList.remove("active"));
+          e.target.classList.add("active");
+          const p = e.target.getAttribute("data-progress") || "0";
+          fill.style.width = p + "%";
+          progress.textContent = p + "%";
+          title.textContent = e.target.querySelector("h2").textContent.replace(/^\d+\.\s*/, "");
+          desc.textContent = e.target.querySelector("p").textContent;
+        });
+      }, { threshold: 0.55 });
+      steps.forEach((s) => io.observe(s));
+    </script>
+  </body>
+  </html>

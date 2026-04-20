@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>终端黑客风</title>
+    <style>
+      body { margin: 0; background: #040706; color: #8cffb2; font-family: Consolas, "Courier New", monospace; }
+      .scan::before { content: ""; position: fixed; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(140,255,178,.05) 0 1px, transparent 1px 3px); }
+      .wrap { max-width: 900px; margin: 40px auto; padding: 0 16px; }
+      .term { border: 1px solid #1f7a4d; border-radius: 10px; overflow: hidden; box-shadow: 0 0 0 1px #0d3f28, 0 0 30px rgba(34,197,94,.2); }
+      .bar { background: #0a1f15; padding: 8px 12px; color: #7cf9a6; font-size: 13px; }
+      .body { background: #020504; padding: 16px; min-height: 420px; }
+      .line { margin: 8px 0; white-space: pre-wrap; }
+      .prompt { color: #6ef59a; }
+      .cursor { display: inline-block; width: 9px; height: 15px; background: #8cffb2; animation: blink 1s steps(1) infinite; }
+      @keyframes blink { 50% { opacity: 0; } }
+      a { color: #9cfec0; }
+    </style>
+  </head>
+  <body class="scan">
+    <div class="wrap">
+      <div class="term">
+        <div class="bar">blog@hack-lab:~</div>
+        <div class="body" id="output"></div>
+      </div>
+    </div>
+    <script>
+      const output = document.getElementById("output");
+      const lines = [
+        "$ whoami",
+        "frontend-dev",
+        "$ cat ./posts/performance-retro.md",
+        "# 标题: 首屏优化复盘",
+        "LCP: 4.2s -> 2.1s",
+        "措施: RSC 边界收缩 / 代码分割 / 图片策略",
+        "$ ls ./posts",
+        "nextjs-rsc.md",
+        "hydration-mismatch.md",
+        "vite-bundleless.md",
+        "$ echo \"访问风格入口\"",
+        "<a href=\"../\">../blog-styles</a>"
+      ];
+      let i = 0;
+      function append(line) {
+        const div = document.createElement("div");
+        div.className = "line";
+        div.innerHTML = (line.startsWith("$ ") ? "<span class='prompt'>$</span> " + line.slice(2) : line);
+        output.appendChild(div);
+        output.scrollTop = output.scrollHeight;
+      }
+      function run() {
+        if (i < lines.length) {
+          append(lines[i++]);
+          setTimeout(run, 420);
+        } else {
+          const c = document.createElement("span");
+          c.className = "cursor";
+          output.appendChild(c);
+        }
+      }
+      run();
+    </script>
+  </body>
+  </html>

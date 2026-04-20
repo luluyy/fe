@@ -1,0 +1,160 @@
+import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+const sidebars: SidebarsConfig = {
+  tutorialSidebar: [
+    'intro',
+    {
+      type: 'category',
+      label: '整理方法',
+      items: ['guide/study-plan', 'guide/question-writing-standard', 'template/question-template'],
+    },
+    {
+      type: 'category',
+      label: '前端基础',
+      items: [
+        'frontend/javascript/closure',
+        'frontend/javascript/event-loop',
+        'frontend/javascript/prototype-chain',
+        'frontend/javascript/this-binding',
+        'frontend/javascript/strict-mode',
+        'frontend/javascript/module-systems',
+        'frontend/javascript/handwrite-bind',
+        'frontend/javascript/handwrite-promise',
+        'frontend/javascript/handwrite-promise-all-race',
+        'frontend/browser/storage',
+        'frontend/browser/reflow-repaint',
+        'frontend/browser/event-delegation',
+        'frontend/browser/target-vs-currentTarget',
+        'frontend/browser/defer-vs-async',
+        'frontend/network/http-cache',
+        'frontend/network/tcp-vs-udp',
+        'frontend/network/url-to-page',
+        'frontend/css/bfc',
+        'frontend/css/css-specificity',
+        'frontend/algorithm/high-frequency',
+        'frontend/practice/debounce-throttle-playground',
+        'frontend/practice/storage-playground',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'TypeScript',
+      items: [
+        {
+          type: 'category',
+          label: 'Top 10 速记卡',
+          items: ['frontend/typescript/top10-cheatsheet'],
+        },
+        {
+          type: 'category',
+          label: '手写代码题',
+          items: ['frontend/typescript/handwrite-coding'],
+        },
+        {
+          type: 'category',
+          label: '基础 20 题',
+          items: ['frontend/typescript/basic-20'],
+        },
+        {
+          type: 'category',
+          label: '进阶 20 题',
+          items: ['frontend/typescript/advanced-20'],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'TanStack',
+      items: ['frontend/tanstack/interview-questions'],
+    },
+    {
+      type: 'category',
+      label: 'Next.js',
+      items: [
+        'frontend/nextjs/interview-questions',
+        'frontend/nextjs/interview-routing-rendering',
+        'frontend/nextjs/interview-data-api',
+        'frontend/nextjs/interview-seo-performance-deploy',
+        'frontend/nextjs/hydration-and-performance',
+        'frontend/nextjs/rsc-data-flow',
+        'frontend/nextjs/backend-workflow',
+        'frontend/nextjs/coupon-feature-flag',
+        'frontend/nextjs/cache-consistency',
+        'frontend/nextjs/db-atomicity-2pc',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'AI 开发岗',
+      items: [
+        {
+          type: 'category',
+          label: '基础 15 题',
+          items: ['ai/foundation-15'],
+        },
+        {
+          type: 'category',
+          label: '进阶 15 题',
+          items: ['ai/advanced-15'],
+        },
+        {
+          type: 'category',
+          label: '项目实战 10 题',
+          items: ['ai/project-scenario-10'],
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'React',
+      items: [
+        {
+          type: 'category',
+          label: '基础',
+          items: [
+            'frontend/react/basic/react-lifecycle',
+            'frontend/react/basic/state-vs-props',
+            'frontend/react/basic/useeffect-deps',
+            'frontend/react/basic/key-meaning',
+            'frontend/react/basic/react-version-history',
+            'frontend/react/basic/react-v16',
+            'frontend/react/basic/react-v17',
+            'frontend/react/basic/react-v18',
+            'frontend/react/basic/react-v19',
+            'frontend/react/basic/react-render-update-principle',
+            'frontend/react/basic/react-strict-mode',
+            'frontend/react/basic/react-virtual-dom-principle',
+            'frontend/react/basic/react-diff-reconciliation-principle',
+          ],
+        },
+        {
+          type: 'category',
+          label: '进阶',
+          items: [
+            'frontend/react/advanced/render-optimization',
+            'frontend/react/advanced/react18-concurrent',
+            'frontend/react/advanced/custom-hooks-design',
+            'frontend/react/advanced/context-performance',
+          ],
+        },
+        'frontend/react/hooks-rules',
+        'frontend/react/controlled-vs-uncontrolled',
+        'frontend/react/memo-usememo-usecallback',
+      ],
+    },
+    {
+      type: 'category',
+      label: '工程化与性能',
+      items: [
+        'frontend/engineering/tree-shaking',
+        'frontend/engineering/code-splitting',
+        'frontend/engineering/source-map',
+        'frontend/build-tools/vite-webpack-interview-questions',
+        'frontend/performance/lcp-fid-cls',
+        'frontend/performance/debounce-throttle',
+        'frontend/performance/lazy-load',
+      ],
+    },
+  ],
+};
+
+export default sidebars;

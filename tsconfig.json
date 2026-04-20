@@ -1,0 +1,10 @@
+{
+  "extends": "@docusaurus/tsconfig",
+  "compilerOptions": {
+    "baseUrl": ".",
+    // 必须保留：这是 TS 对「.tsx 里 <Foo /> 语法」的开关，名字固定叫 jsx，不是让你改用 .jsx 文件
+    "jsx": "preserve"
+  },
+  "include": ["src/**/*", "*.ts", "*.tsx"],
+  "exclude": [".docusaurus", "build", "node_modules"]
+}

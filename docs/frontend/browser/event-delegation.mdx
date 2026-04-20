@@ -1,0 +1,91 @@
+---
+title: 事件委托
+---
+
+import LeafTreeSelectorDemo from '@site/src/components/interactive/LeafTreeSelectorDemo';
+import LeafTreeSelectorCodePlayground from '@site/src/components/interactive/LeafTreeSelectorCodePlayground';
+
+# 事件委托
+
+把子元素事件挂到父元素，利用事件冒泡统一处理。
+
+优点：减少监听器数量，动态节点无需重复绑定。
+
+## 示例：点击待办项的“删除”按钮
+
+```html
+<ul id="todoList">
+  <li data-id="1">学习闭包 <button class="del-btn">删除</button></li>
+  <li data-id="2">学习 this <button class="del-btn">删除</button></li>
+</ul>
+```
+
+```js
+const todoList = document.getElementById('todoList');
+
+todoList.addEventListener('click', (event) => {
+  const target = event.target;
+  if (target.matches('.del-btn')) {
+    const li = target.closest('li');
+    const id = li?.dataset.id;
+    console.log('删除项 id:', id);
+    li?.remove();
+  }
+});
+```
+
+### 为什么这就是事件委托？
+
+- 监听器只绑定在父节点 `ul` 上，而不是每个按钮都绑一次。
+- 子节点点击会冒泡到父节点，父节点统一判断 `event.target`。
+- 后续动态新增 `li` 也自动生效，无需重新绑定事件。
+
+## 示例：叶子树结构选择组件（只允许选叶子节点）
+
+下面是可交互 UI（可直接点击）：
+
+<LeafTreeSelectorDemo />
+
+React 实现核心：
+
+```tsx
+const onTreeClick = (e: React.MouseEvent<HTMLDivElement>) => {
+  const target = e.target as HTMLElement;
+  const nodeEl = target.closest('[data-node-id]') as HTMLElement | null;
+  if (!nodeEl) return;
+
+  const nodeId = nodeEl.dataset.nodeId!;
+  const node = idToNode.get(nodeId);
+  if (!node || !node.isLeaf) return;
+
+  setSelectedIds((prev) =>
+    prev.includes(nodeId) ? prev.filter((id) => id !== nodeId) : [...prev, nodeId],
+  );
+};
+```
+
+这个例子在面试里常用来说明：
+
+- 为什么树组件推荐事件委托（节点很多、动态增删频繁）。
+- 如何限制“只能选叶子节点”。
+- 如何用 `Set` 或数组管理多选状态。
+
+## target 和 currentTarget 的区别
+
+- `event.target`：事件最初触发的元素（真实点击源）。
+- `event.currentTarget`：当前正在执行监听器的元素（绑定监听器的节点）。
+
+在上面的树组件中：
+
+- 监听器绑在树容器上，所以 `event.currentTarget` 是容器。
+- 点击某个节点文本时，`event.target` 是被点击的具体元素。
+
+面试一句话：**target 是“谁触发的”，currentTarget 是“谁在处理”。**
+
+## 在线编辑代码并同步渲染 UI（React + JSON）
+
+你可以在左侧编辑 `TreeData JSON`，右侧的叶子树选择 UI 会立刻刷新：
+
+<LeafTreeSelectorCodePlayground />
+
+这类题面试官常用来追问：数据驱动如何渲染、事件委托如何定位节点、以及“只允许选叶子”的约束如何落在业务逻辑上。
