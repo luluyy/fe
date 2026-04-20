@@ -43,6 +43,8 @@ const reconcile = () => {
 //调度器
 const workLoop = () => {
     reconcile();
+    //react为什么不用requestIdleCallback/schedule.postTask？
+    //因为requestIdleCallback/schedule.postTask,没有优先级，不能根据优先级来执行任务，所以不能保证任务的执行顺序
     requestIdleCallback(()=>workLoop())
     // window.requestIdleCallback(workLoop);
     // window.requestAnimationFrame(workLoop);
