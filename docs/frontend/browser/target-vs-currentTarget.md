@@ -47,6 +47,6 @@ container.addEventListener('click', (event) => {
 });
 ```
 
-## 面试口述模板（15 秒）
+## 技术要点总结（15 秒）
 
 `target` 是事件源，`currentTarget` 是当前处理者。在事件委托里通常用 `target` 做命中判断，用 `currentTarget` 作为边界容器。

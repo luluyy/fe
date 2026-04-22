@@ -14,7 +14,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
     description: (
       <>
-        先攻克高频题，再扩展到中低频题，优先保证面试命中率。
+        先攻克高频知识点，再扩展到中低频内容，优先保证技术掌握深度。
       </>
     ),
   },
@@ -32,7 +32,7 @@ const FeatureList: FeatureItem[] = [
     Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
     description: (
       <>
-        每周模拟面试并回写错题，形成可追踪的个人知识库闭环。
+        每周进行技术复习并记录学习心得，形成可追踪的个人知识库闭环。
       </>
     ),
   },

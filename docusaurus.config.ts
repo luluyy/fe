@@ -5,8 +5,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const config: Config = {
-  title: '面试题整理',
-  tagline: '前端面试笔记 · React 文档站',
+  title: '前端技术笔记',
+  tagline: '前端技术文档 · React 知识库',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -88,12 +88,17 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: '面试题整理',
+      title: '前端技术笔记',
       logo: {
         alt: 'My Site Logo',
         src: 'img/logo.svg',
       },
       items: [
+        {
+          label: '展示',
+          to: '/showcase',
+          position: 'left',
+        },
         {
           type: 'docSidebar',
           sidebarId: 'tutorialSidebar',
@@ -151,7 +156,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} 面试题整理. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} 前端技术笔记. Built with Docusaurus.`,
     },
     prism: {
       theme: prismThemes.github,

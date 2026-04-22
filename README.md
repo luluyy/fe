@@ -1,6 +1,6 @@
 # fe
 
-面试题文档站（[Docusaurus](https://docusaurus.io/)，React + Markdown）。
+前端技术文档站（[Docusaurus](https://docusaurus.io/)，React + Markdown）。
 
 ## 安装依赖
 

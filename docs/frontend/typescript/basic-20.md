@@ -27,7 +27,7 @@ function sum(a: number, b: number): number {
 ### TS 会不会影响运行时性能？
 
 不会，类型会在编译后擦除。
-### 面试口述模板
+### 技术要点总结
 TS 核心是把错误前移到编译期，提高可维护性。
 
 ## 2) `any` / `unknown` / `never` 区别
@@ -56,7 +56,7 @@ function parseUser(input: unknown) {
 ### 何时必须避免 any？
 
 跨模块公共接口、外部输入边界尽量避免 any。
-### 面试口述模板
+### 技术要点总结
 unknown 更安全，any 会污染下游类型。
 
 ## 3) `type` vs `interface`
@@ -82,7 +82,7 @@ type Shape =
 ### 团队里如何统一使用？
 
 对象契约优先 interface，复杂组合优先 type。
-### 面试口述模板
+### 技术要点总结
 两者都能建模，关键是统一规范与可读性。
 
 ## 4) 联合类型与类型守卫
@@ -109,7 +109,7 @@ function formatValue(v: string | Date) {
 ### `in` 和 `instanceof` 何时用？
 
 in 适合对象结构判别，instanceof 适合类实例判别。
-### 面试口述模板
+### 技术要点总结
 先收窄再访问，是联合类型的核心原则。
 
 ## 5) 交叉类型
@@ -135,7 +135,7 @@ type Query = Pageable & Sortable;
 ### 交叉冲突会怎样？
 
 冲突字段可能收敛为 never，导致类型不可赋值。
-### 面试口述模板
+### 技术要点总结
 交叉是“且”关系，适合组合能力。
 
 ## 6) 类型断言 `as`
@@ -163,7 +163,7 @@ function getInput() {
 ### `as unknown as` 有何风险？
 
 可能绕过类型系统，掩盖真实错误。
-### 面试口述模板
+### 技术要点总结
 断言是兜底，不是常规建模手段。
 
 ## 7) 字面量类型与 `as const`
@@ -192,7 +192,7 @@ type Status = (typeof STATUS)[keyof typeof STATUS];
 ### 和 enum 怎么选？
 
 轻量和产物体积优先时常选 `as const`。
-### 面试口述模板
+### 技术要点总结
 as const 很适合前端常量映射场景。
 
 ## 8) `readonly` vs `const`
@@ -219,7 +219,7 @@ u.profile.name = 'new';
 ### 深层只读怎么做？
 
 使用递归映射类型实现 `DeepReadonly`。
-### 面试口述模板
+### 技术要点总结
 两者作用层级不同：变量 vs 属性。
 
 ## 9) 可选属性与可选参数
@@ -247,7 +247,7 @@ function request(url: string, options: Options = {}) {
 ### `exactOptionalPropertyTypes` 是什么？
 
 开启后可选属性语义更严格，避免误判。
-### 面试口述模板
+### 技术要点总结
 可选不等于任意，依然要做判空。
 
 ## 10) 函数重载
@@ -275,7 +275,7 @@ function parse(x: string | number) {
 ### 何时改用泛型？
 
 当参数与返回有统一映射规则时优先泛型。
-### 面试口述模板
+### 技术要点总结
 重载适合少量分支且语义明确场景。
 
 ## 11) 泛型基础
@@ -301,7 +301,7 @@ function first<T>(arr: T[]): T | undefined {
 ### 泛型默认值怎么写？
 
 `<T = unknown>`。
-### 面试口述模板
+### 技术要点总结
 泛型是 TS 可复用的核心能力。
 
 ## 12) 泛型约束 `extends`
@@ -327,7 +327,7 @@ function pluckId<T extends { id: string }>(list: T[]) {
 ### 多个约束如何组合？
 
 使用交叉约束 `T extends A & B`。
-### 面试口述模板
+### 技术要点总结
 先约束再复用，类型更稳。
 
 ## 13) `keyof` / `typeof` / `T[K]`
@@ -353,7 +353,7 @@ function getProp<T, K extends keyof T>(obj: T, key: K): T[K] {
 ### 联合上的 keyof 行为？
 
 通常得到键并集，访问仍需收窄。
-### 面试口述模板
+### 技术要点总结
 这是构建高级类型工具的三件套。
 
 ## 14) 工具类型 `Record/Pick/Omit`
@@ -379,7 +379,7 @@ type UserUpdate = Omit<Partial<User>, 'id'>;
 ### 如何手写 MyOmit？
 
 `type MyOmit<T,K extends keyof any> = Pick<T, Exclude<keyof T,K>>`。
-### 面试口述模板
+### 技术要点总结
 先用内置工具，再考虑自定义。
 
 ## 15) `Partial/Required/Readonly`
@@ -405,7 +405,7 @@ type UpdateUser = Partial<CreateUser>;
 ### Partial 用多了风险？
 
 可能放宽过度，关键字段需补回必填。
-### 面试口述模板
+### 技术要点总结
 工具类型要服务业务边界。
 
 ## 16) 结构化类型系统
@@ -431,7 +431,7 @@ TS 关注结构是否满足，不要求名义类型一致。
 ### excess property check 何时触发？
 
 对象字面量直接赋值时最严格。
-### 面试口述模板
+### 技术要点总结
 理解结构化类型能解释很多“为什么能赋值”。
 
 ## 17) `enum` 与替代
@@ -456,7 +456,7 @@ type Role = (typeof ROLE)[keyof typeof ROLE];
 ### const enum 优缺点？
 
 优点是内联，缺点是构建兼容性要评估。
-### 面试口述模板
+### 技术要点总结
 按项目构建链与团队偏好选型。
 
 ## 18) `tsconfig` 核心项
@@ -486,7 +486,7 @@ type Role = (typeof ROLE)[keyof typeof ROLE];
 ### strict 下最常见报错？
 
 strictNullChecks 与 noImplicitAny。
-### 面试口述模板
+### 技术要点总结
 编译配置是 TS 质量底座。
 
 ## 19) `strict` 的价值
@@ -513,7 +513,7 @@ strictNullChecks 下必须显式处理空值分支。
 ### 老项目如何渐进开启？
 
 先新模块开启，再按目录灰度收敛。
-### 面试口述模板
+### 技术要点总结
 strict 不是负担，是长期收益。
 
 ## 20) 团队落地策略
@@ -539,5 +539,5 @@ strict 不是负担，是长期收益。
 ### 收益如何衡量？
 
 看故障率、重构效率、PR 质量。
-### 面试口述模板
+### 技术要点总结
 TS 落地是工程治理，不是一次性改造。

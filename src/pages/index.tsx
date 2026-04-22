@@ -62,7 +62,7 @@ function QuickNav(): ReactElement {
 export default function Home(): ReactElement {
   const {siteConfig} = useDocusaurusContext();
   return (
-    <Layout title={`${siteConfig.title} - 首页`} description="前端面试题整理与复习路径">
+    <Layout title={`${siteConfig.title} - 首页`} description="前端技术知识整理与学习路径">
       <HomepageHeader />
       <main>
         <QuickNav />

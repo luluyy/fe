@@ -1,8 +1,8 @@
 ---
-title: TanStack 生态面试题（完整结构）
+title: TanStack 生态技术要点（完整结构）
 ---
 
-# TanStack 生态面试题（完整结构）
+# TanStack 生态技术要点（完整结构）
 
 ## 1) Query 解决什么问题？
 ### 代码示例

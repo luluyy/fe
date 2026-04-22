@@ -19,7 +19,7 @@ TS 是 JS 的超集，在编译期做类型检查。
 ### TS 会不会影响运行时性能？
 
 不会，类型会在编译后擦除。
-### 面试口述模板
+### 技术要点总结
 TS 核心是把错误前移到编译期，提高可维护性。
 
 ## 2) `any` / `unknown` / `never` 区别
@@ -37,7 +37,7 @@ let a: any; let u: unknown; function fail(): never { throw new Error('x'); }
 ### 何时必须避免 any？
 
 跨模块公共接口、外部输入边界尽量避免 any。
-### 面试口述模板
+### 技术要点总结
 unknown 更安全，any 会污染下游类型。
 
 ## 3) `type` vs `interface`
@@ -55,7 +55,7 @@ interface 适合对象契约且可合并，type 更灵活支持联合/交叉。
 ### 团队里如何统一使用？
 
 对象契约优先 interface，复杂组合优先 type。
-### 面试口述模板
+### 技术要点总结
 两者都能建模，关键是统一规范与可读性。
 
 ## 4) 联合类型与类型守卫
@@ -73,7 +73,7 @@ function f(x: string | number){ return typeof x==='string' ? x.length : x.toFixe
 ### `in` 和 `instanceof` 何时用？
 
 in 适合对象结构判别，instanceof 适合类实例判别。
-### 面试口述模板
+### 技术要点总结
 先收窄再访问，是联合类型的核心原则。
 
 ## 5) 交叉类型
@@ -91,7 +91,7 @@ type U = {id:string} & {name:string};
 ### 交叉冲突会怎样？
 
 冲突字段可能收敛为 never，导致类型不可赋值。
-### 面试口述模板
+### 技术要点总结
 交叉是“且”关系，适合组合能力。
 
 ## 6) 类型断言 `as`
@@ -109,7 +109,7 @@ const el = document.getElementById('app') as HTMLDivElement;
 ### `as unknown as` 有何风险？
 
 可能绕过类型系统，掩盖真实错误。
-### 面试口述模板
+### 技术要点总结
 断言是兜底，不是常规建模手段。
 
 ## 7) 字面量类型与 `as const`
@@ -127,7 +127,7 @@ const cfg = { mode: 'dark' } as const;
 ### 和 enum 怎么选？
 
 轻量和产物体积优先时常选 `as const`。
-### 面试口述模板
+### 技术要点总结
 as const 很适合前端常量映射场景。
 
 ## 8) `readonly` vs `const`
@@ -145,7 +145,7 @@ const 约束变量绑定，readonly 约束属性可写性。
 ### 深层只读怎么做？
 
 使用递归映射类型实现 `DeepReadonly`。
-### 面试口述模板
+### 技术要点总结
 两者作用层级不同：变量 vs 属性。
 
 ## 9) 可选属性与可选参数
@@ -163,7 +163,7 @@ type User = {name:string; age?:number};
 ### `exactOptionalPropertyTypes` 是什么？
 
 开启后可选属性语义更严格，避免误判。
-### 面试口述模板
+### 技术要点总结
 可选不等于任意，依然要做判空。
 
 ## 10) 函数重载
@@ -181,5 +181,5 @@ function g(x:string):string; function g(x:number):number; function g(x:any){ ret
 ### 何时改用泛型？
 
 当参数与返回有统一映射规则时优先泛型。
-### 面试口述模板
+### 技术要点总结
 重载适合少量分支且语义明确场景。

@@ -92,7 +92,7 @@ export default function Counter() {
 - 对这类逻辑改为 `useEffect` 后再读取。
 - 对必须纯客户端渲染的组件用 `dynamic(..., { ssr: false })`。
 
-### 面试口述模板
+### 技术要点总结
 
 水合是 React 在浏览器端接管服务端 HTML 的过程，核心价值是首屏先展示、交互后接管。优化重点是减少需要水合的客户端组件，控制 `use client` 边界，并避免服务端与客户端输出不一致导致的 hydration mismatch。
 
@@ -155,7 +155,7 @@ await fetch("https://api.example.com/home", {
 
 通常不建议阻塞关键路径，优先延后加载或懒加载。
 
-### 面试口述模板
+### 技术要点总结
 
 Next.js 首屏优化我会先定渲染策略，再做资源和 JS 预算控制。具体是：静态优先、减少 `use client`、重组件动态加载、图片字体优化、并发取数和缓存命中，最后用 LCP/INP/CLS 做数据验收。
 
@@ -225,6 +225,6 @@ export default function Demo() {
 
 先测量后优化：先用 Lighthouse / Web Vitals / React Profiler 定位瓶颈，再做最小改动。
 
-### 面试口述模板
+### 技术要点总结
 
 我做 Next.js + React 性能优化时，会先按“渲染策略、JS 体积、渲染次数、数据链路”四层拆解。Next.js 侧控制 SSR/SSG/缓存和 `use client` 边界，React 侧减少无效重渲染，服务端侧优化接口与缓存，最后用 Web Vitals 和 Profiler 量化收益。

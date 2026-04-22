@@ -19,7 +19,7 @@ type MyPick<T, K extends keyof T> = { [P in K]: T[P] };
 ### 如果 K 不在 T 中会怎样？
 
 编译期报错，由 `K extends keyof T` 约束保证。
-### 面试口述模板
+### 技术要点总结
 核心是映射类型 + 键约束，保证选取字段类型安全。
 
 ## 2) 手写 MyOmit
@@ -37,7 +37,7 @@ type MyOmit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
 ### 为什么 K 用 keyof any？
 
 覆盖 string/number/symbol 键类型。
-### 面试口述模板
+### 技术要点总结
 Omit 本质是 Exclude + Pick 组合。
 
 ## 3) 手写 MyReturnType
@@ -55,7 +55,7 @@ type MyReturnType<T> = T extends (...args:any[]) => infer R ? R : never;
 ### 非函数输入返回什么？
 
 返回 never。
-### 面试口述模板
+### 技术要点总结
 条件类型 + infer 是手写工具类型高频组合。
 
 ## 4) 手写 DeepReadonly
@@ -73,7 +73,7 @@ type DeepReadonly<T> = T extends (...args:any[])=>any ? T : T extends object ? {
 ### 数组会怎样？
 
 数组元素同样会被递归处理。
-### 面试口述模板
+### 技术要点总结
 递归映射是深层类型变换关键技巧。
 
 ## 5) 类型安全 EventEmitter
@@ -91,7 +91,7 @@ type Events = { login:{id:string}; logout:undefined };
 ### 如何扩展 once/off？
 
 维护 handler 列表并支持按引用移除。
-### 面试口述模板
+### 技术要点总结
 核心是键到值的映射约束。
 
 ## 6) 手写 debounce（保留签名）
@@ -109,8 +109,8 @@ function debounce<T extends (...args:any[])=>void>(fn:T, wait=300){ let t:Return
 ### 立即执行版怎么写？
 
 加入 leading 逻辑，首次立即执行。
-### 面试口述模板
-在工具函数中保留签名是 TS 面试加分点。
+### 技术要点总结
+在工具函数中保留签名是 TS 技术加分点。
 
 ## 7) 手写 promiseAll（类型安全）
 ### 代码示例
@@ -127,7 +127,7 @@ type AwaitedValue<T> = T extends Promise<infer R> ? R : T;
 ### 为什么要支持普通值？
 
 原生 Promise.all 就支持普通值并原样返回。
-### 面试口述模板
+### 技术要点总结
 关键是元组映射与 Awaited 思维。
 
 ## 8) 手写类型守卫 isUser
@@ -145,5 +145,5 @@ function isUser(v: unknown): v is {id:string;name:string} { return typeof v==='o
 ### 为什么比 as 更安全？
 
 有运行时判断，不依赖编译期假设。
-### 面试口述模板
+### 技术要点总结
 守卫是 unknown 边界收敛的标准做法。
